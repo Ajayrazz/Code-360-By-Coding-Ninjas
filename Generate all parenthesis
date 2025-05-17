@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+public class Solution {
+	
+	
+	
+	public static void printWellFormedParanthesis( int n){
+		
+		// Write your code here
+		ArrayList<String> result = new ArrayList<>();
+		//Call the helper function
+		helper("", 0, 0, n, result);
+
+		//print the result
+		for(String str : result){
+			System.out.println(str);
+		}
+	}
+
+	//Helper Function For Generating Parenthesis
+	private static void helper(String current, int openP, int closeP, int n, ArrayList<String> result){
+		//base case
+		if(current.length() == 2*n){
+			result.add(current);
+			return;
+		}
+
+		if(openP < n){
+			helper(current + '(', openP + 1, closeP, n, result);
+		}
+
+		if(closeP < openP){
+			helper(current + ')', openP, closeP + 1, n, result);
+		}
+	}
+	
+}
+	
+
