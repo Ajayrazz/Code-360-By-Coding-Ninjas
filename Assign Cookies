@@ -1,0 +1,22 @@
+import java.util.*;
+public class Solution {
+    public static int assignCookie(int []greed, int []size) {
+        // Write your code here.
+        //sort it
+        Arrays.sort(greed);
+        Arrays.sort(size);
+
+        int g = 0;
+        int s = 0;
+
+        while(g < greed.length && s < size.length){
+            if(greed[g] <= size[s]){
+                g++;
+            }
+            s++;
+        }
+
+        return g;
+    }
+
+}
