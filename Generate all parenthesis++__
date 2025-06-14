@@ -1,0 +1,34 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<String> validParenthesis(int n){
+        // Write your code here.
+        //base case
+        if(n == 0){
+            return new ArrayList<>();
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+        //call the helper function
+        helper(0, 0, n, "", result);
+        //return it
+        return result;
+    } 
+
+    //Function To Generate The Parenthesis
+    public static void helper(int openP, int closeP, int n, String current, ArrayList<String> result){
+        //base case
+        if(current.length() == 2 * n){
+            result.add(current);
+            return;
+        }
+
+        if(openP < n){
+            helper(openP + 1, closeP, n, current + '(', result);
+        }
+
+        if(closeP < openP){
+            helper(openP, closeP + 1, n, current + ')', result);
+        }
+    }
+}
