@@ -1,0 +1,52 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure.
+
+	class TreeNode<T> 
+	{
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) 
+	    {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+************************************************************/
+
+public class Solution 
+{
+	public static TreeNode<Integer> prev = null;
+    public static TreeNode<Integer> flattenBinaryTree(TreeNode<Integer> root)
+    {
+        // Write your code here.
+		//base case
+		if(root == null){
+			return root;
+		}
+
+		Helper(root);
+		return root;
+    }
+
+	//Helper Function To Flatten A Binary Tree Into LinkedList
+	public static void Helper(TreeNode<Integer> root){
+		if(root == null){
+			return;
+		}
+
+		Helper(root.right);
+		Helper(root.left);
+
+		root.right = prev;
+		root.left = null;
+
+		prev = root;
+	}
+}
