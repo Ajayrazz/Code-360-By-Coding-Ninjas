@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Solution {
+    public static int[] jobScheduling(int [][]jobs) {
+        // Convert the 2D array to a list of jobs
+        Arrays.sort(jobs, (a, b) -> b[2] - a[2]); // Sort by profit descending
+
+        // Find maximum deadline
+        int maxDeadline = 0;
+        for (int i = 0; i < jobs.length; i++) {
+            if (jobs[i][1] > maxDeadline) {
+                maxDeadline = jobs[i][1];
+            }
+        }
+
+        // Create result array for time slots
+        int[] slots = new int[maxDeadline + 1];
+        Arrays.fill(slots, -1); // -1 indicates free slot
+
+        int countJobs = 0;
+        int totalProfit = 0;
+
+        // Try to schedule each job
+        for (int i = 0; i < jobs.length; i++) {
+            int deadline = jobs[i][1];
+            int profit = jobs[i][2];
+
+            // Find a free slot from deadline down to 1
+            for (int j = deadline; j > 0; j--) {
+                if (slots[j] == -1) {
+                    slots[j] = jobs[i][0]; // store job id (optional)
+                    countJobs++;
+                    totalProfit += profit;
+                    break;
+                }
+            }
+        }
+
+        return new int[] { countJobs, totalProfit };
+    }
+}
